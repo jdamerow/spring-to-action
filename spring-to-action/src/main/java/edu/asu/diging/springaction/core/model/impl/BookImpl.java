@@ -3,7 +3,10 @@ package edu.asu.diging.springaction.core.model.impl;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
+import edu.asu.diging.simpleusers.core.model.IUser;
+import edu.asu.diging.simpleusers.core.model.impl.User;
 import edu.asu.diging.springaction.core.model.Book;
 
 @Entity
@@ -17,6 +20,8 @@ public class BookImpl implements Book {
 	private String author;
 	
 	private boolean available;
+	@ManyToOne(targetEntity = User.class)
+	private IUser borrower;
 	
 	/* (non-Javadoc)
 	 * @see edu.asu.diging.springaction.core.model.impl.Book#getId()
@@ -67,5 +72,13 @@ public class BookImpl implements Book {
 	@Override
 	public void setAvailable(boolean available) {
 		this.available = available;
+	}
+	@Override
+	public IUser getBorrower() {
+		return borrower;
+	}
+	@Override
+	public void setBorrower(IUser borrower) {
+		this.borrower = borrower;
 	}
 }

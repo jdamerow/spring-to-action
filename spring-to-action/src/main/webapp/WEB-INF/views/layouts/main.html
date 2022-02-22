@@ -50,6 +50,11 @@
 	          		<a th:href="@{/admin/user/list}" >Users</a>
 	          	</li>
 	          	
+	          	 <li sec:authorize="isAuthenticated()" role="presentation">
+	         	 	<a th:href="@{/auth/books}" >Books</a>
+	         	 </li>
+	         	
+	          	
 	          	<li sec:authorize="isAuthenticated()" role="presentation">
 	         	 	<form th:action="@{/logout}" method="POST">
 	         	 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

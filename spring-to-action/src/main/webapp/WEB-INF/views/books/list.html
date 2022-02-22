@@ -4,6 +4,7 @@
   </head>
   <body>
    <div layout:fragment="content">
+   		<h2>Books you borrowed</h2>
    	  <div th:if="${msg}" class="alert alert-info" role="alert">[[${msg}]]</div>
    	  
       <ul class="list-group">
@@ -13,8 +14,8 @@
 			<span th:if="${book.available}" class="label label-info">Available</span>
 			
 			<div sec:authorize="isAuthenticated()">
-				<form  th:action="@{|/auth/book/${book.id}/borrow|}" method="POST">
-				<button class="pull-right btn btn-default btn-sm" type="submit">Borrow</button>
+				<form  th:action="@{|/auth/book/${book.id}/return|}" method="POST">
+				<button class="pull-right btn btn-default btn-sm" type="submit">Return</button>
 				</form>
 			</div>
 		</li>

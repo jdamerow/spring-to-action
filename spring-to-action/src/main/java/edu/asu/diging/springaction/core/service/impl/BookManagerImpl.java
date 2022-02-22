@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 
+import edu.asu.diging.simpleusers.core.model.IUser;
 import edu.asu.diging.springaction.core.data.BookRepository;
 import edu.asu.diging.springaction.core.model.Book;
 import edu.asu.diging.springaction.core.model.impl.BookImpl;
@@ -33,5 +34,31 @@ public class BookManagerImpl implements BookManager {
 		book.setTitle(title);
 		book.setAvailable(true);
 		return bookRepo.save((BookImpl)book);
+	}
+	
+	@Override
+	public Book get(Long id) {
+		return bookRepo.findById(id).orElse(null);
+	}
+	
+	@Override
+	public void borrow(IUser user, Book book) {
+		book.setBorrower(user);
+		book.setAvailable(false);
+		bookRepo.save((BookImpl)book);
+	}
+	
+	@Override
+	public void returnBook(Book book) {
+		book.setBorrower(null);
+		book.setAvailable(true);
+		bookRepo.save((BookImpl)book);
+	}
+	
+	
+	@Override
+	public List<Book> findByUser(IUser user) {
+		List<BookImpl> books = bookRepo.findByBorrower(user);
+		return books.stream().filter(b -> !b.isAvailable()).collect(Collectors.toList());
 	}
 }

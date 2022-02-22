@@ -1,5 +1,7 @@
 package edu.asu.diging.springaction.core.model;
 
+import edu.asu.diging.simpleusers.core.model.IUser;
+
 public interface Book {
 
 	Long getId();
@@ -17,5 +19,9 @@ public interface Book {
 	void setAvailable(boolean available);
 
 	boolean isAvailable();
+
+	void setBorrower(IUser borrower);
+
+	IUser getBorrower();
 
 }

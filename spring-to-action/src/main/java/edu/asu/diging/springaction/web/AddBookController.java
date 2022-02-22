@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import edu.asu.diging.springaction.core.model.Book;
 import edu.asu.diging.springaction.core.model.impl.BookImpl;
 import edu.asu.diging.springaction.core.service.BookManager;
 
@@ -23,7 +24,7 @@ public class AddBookController {
 	}
 	
 	@RequestMapping(value="admin/book/add", method=RequestMethod.POST)
-	public String add(@ModelAttribute("book") BookImpl book) {
+	public String add(@ModelAttribute("book") Book book) {
 		bookManager.store(book.getAuthor(), book.getTitle());
 		return "redirect:/admin/book/add";
 	}
